@@ -1,6 +1,6 @@
 // $(() => {
 
-    const starters = [`Pikachu`, `Bulbasaur`, `Charmander`, `Squirtle`]
+    const starters = [`Pikachu`, `Bulbasaur`, `Charmander`, `Squirtle`, `Eevee`]
 
     const pokemon = [
         pikachu = {
@@ -39,6 +39,16 @@
             experience: 5,
             rarity: 4,
         },
+        eevee = {
+            health: 50,
+            attack: 50,
+            speed: 50,
+            level: 1,
+            type: `normal`,
+            experience: 5,
+            rarity: 5,
+        },
+
     ]
     
     // base logic that will probably be reused a lot 
@@ -55,32 +65,40 @@
                 console.log(`You got a Pikachu!`)
             } else {
                 player.team.push(starters[0])
+                comp.team.push(starters[4])
             }
             console.log(player.team)
+            console.log(comp.team)
         },
         pickBulb: function() {
             if (player.team.length === 1) {
                 console.log(`You got a Bulbasaur!`)
             } else {
                 player.team.push(starters[1])
+                comp.team.push(starters[2])
             } 
             console.log(player.team)
+            console.log(comp.team)
         },
         pickChar: function() {
             if (player.team.length === 1) {
                 console.log(`You got a Charmander!`)
             } else {
                 player.team.push(starters[2])
+                comp.team.push(starters[3])
             }
             console.log(player.team)
+            console.log(comp.team)
         },
         pickSquirtle: function() {
             if (player.team.length === 1) {
                 console.log(`You got a Squirtle!`)
             } else {
                 player.team.push(starters[3])
+                comp.team.push(starters[1])
             }
             console.log(player.team)
+            console.log(comp.team)
         }
     }
     const battleLogic = {
