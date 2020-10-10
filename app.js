@@ -365,7 +365,7 @@
             } else if (attacker.team[0].type === `fairy` && defender.team[0].type === `steel`) {
                 console.log(defender.team[0].health -= attacker.team[0].attack / 2)
             } else {
-                console.log(defender.team[0].health -= attcker.team[0].attack)
+                console.log(defender.team[0].health -= attacker.team[0].attack)
             }
         },  
     }
