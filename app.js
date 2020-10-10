@@ -1,14 +1,25 @@
-const baseURL = `https://pokeapi.co/api/v2/`
-const type = `pokemon/`
-const search = `pikachu`
-const queryURL = baseURL + type + search
+// $(() => {
 
-console.log(queryURL)
+    const starters = [`Pikachu`, `Bulbasaur`, `Charmander`, `Squirtle`]
+    
 
-$(() => {
-    const change = () => {
-        $(`body`).addClass(`catch`).css(`background-image`, `url('https://i.imgur.com/TwyTW24.png')`)
-        $(`body`).html(`<h1>`).text(`This is a test`).addClass(`catch`)
+    const baseLogic = {
+        randomNum: function(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        },
+
     }
-    $(`#test`).on(`click`, change)
-})
+
+    const player = {
+        team: [],
+        caught: [],
+        items: [],
+        pokeballs: [],
+    }
+
+    const comp = {
+        team: [],
+        items: [],
+    }
+
+// })
