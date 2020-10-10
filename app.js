@@ -49,6 +49,40 @@
 
     }
 
+    const pickStarter = {
+        pickPika: function() {
+            if (player.team.length === 1) {
+                console.log(`You got a Pikachu!`)
+            } else {
+                player.team.push(starters[0])
+            }
+            console.log(player.team)
+        },
+        pickBulb: function() {
+            if (player.team.length === 1) {
+                console.log(`You got a Bulbasaur!`)
+            } else {
+                player.team.push(starters[1])
+            } 
+            console.log(player.team)
+        },
+        pickChar: function() {
+            if (player.team.length === 1) {
+                console.log(`You got a Charmander!`)
+            } else {
+                player.team.push(starters[2])
+            }
+            console.log(player.team)
+        },
+        pickSquirtle: function() {
+            if (player.team.length === 1) {
+                console.log(`You got a Squirtle!`)
+            } else {
+                player.team.push(starters[3])
+            }
+            console.log(player.team)
+        }
+    }
     const battleLogic = {
 
     }
