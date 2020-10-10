@@ -1,9 +1,8 @@
 // $(() => {
 
-    const starters = [`Pikachu`, `Bulbasaur`, `Charmander`, `Squirtle`, `Eevee`]
-
     const pokemon = [
         pikachu = {
+            name: `Pikachu`,
             health: 48,
             attack: 50,
             speed: 100,
@@ -13,6 +12,7 @@
             rarity: 3,
         },
         bulbasaur = {
+            name: 'Bulbasaur',
             health: 50,
             attack: 40,
             speed: 50,
@@ -22,6 +22,7 @@
             rarity: 4,
         },
         charmander = {
+            name: 'Charmander',
             health: 60,
             attack: 60,
             speed: 60,
@@ -31,6 +32,7 @@
             rarity: 4,
         },
         squirtle = {
+            name: 'Squirtle',
             health: 70,
             attack: 50,
             speed: 40,
@@ -40,6 +42,7 @@
             rarity: 4,
         },
         eevee = {
+            name: 'Eevee',
             health: 50,
             attack: 50,
             speed: 50,
@@ -64,8 +67,8 @@
             if (player.team.length === 1) {
                 console.log(`You got a Pikachu!`)
             } else {
-                player.team.push(starters[0])
-                comp.team.push(starters[4])
+                player.team.push(pokemon[0])
+                comp.team.push(pokemon[4])
             }
             console.log(player.team)
             console.log(comp.team)
@@ -74,8 +77,8 @@
             if (player.team.length === 1) {
                 console.log(`You got a Bulbasaur!`)
             } else {
-                player.team.push(starters[1])
-                comp.team.push(starters[2])
+                player.team.push(pokemon[1])
+                comp.team.push(pokemon[2])
             } 
             console.log(player.team)
             console.log(comp.team)
@@ -84,8 +87,8 @@
             if (player.team.length === 1) {
                 console.log(`You got a Charmander!`)
             } else {
-                player.team.push(starters[2])
-                comp.team.push(starters[3])
+                player.team.push(pokemon[2])
+                comp.team.push(pokemon[3])
             }
             console.log(player.team)
             console.log(comp.team)
@@ -94,15 +97,19 @@
             if (player.team.length === 1) {
                 console.log(`You got a Squirtle!`)
             } else {
-                player.team.push(starters[3])
-                comp.team.push(starters[1])
+                player.team.push(pokemon[3])
+                comp.team.push(pokemon[1])
             }
-            console.log(player.team)
-            console.log(comp.team)
+            console.log(player.team[0])
+            console.log(comp.team[0])
         }
     }
-    const battleLogic = {
 
+    const battleLogic = {
+        fight: function () {
+            comp.team[0].health -= player.team[0].attack
+            console.log(comp.team[0].health)
+        },
     }
 
     const catchLogic = {
@@ -110,6 +117,7 @@
     }
 
     const player = {
+        itemCounter: '',
         team: [],
         caught: [],
         items: [],
