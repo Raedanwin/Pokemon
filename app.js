@@ -9,7 +9,7 @@
             speed: 100,
             level: 1,
             type: `electric`,
-            experience: 5,
+            experience: 0,
             rarity: 3,
         },
         {
@@ -20,7 +20,7 @@
             speed: 50,
             level: 1,
             type: `grass`,
-            experience: 5,
+            experience: 0,
             rarity: 4,
         },
         {
@@ -31,7 +31,7 @@
             speed: 60,
             level: 1,
             type: `fire`,
-            experience: 5,
+            experience: 0,
             rarity: 4,
         },
         {
@@ -42,7 +42,7 @@
             speed: 40,
             level: 1,
             type: `water`,
-            experience: 5,
+            experience: 0,
             rarity: 4,
         },
         {
@@ -53,7 +53,7 @@
             speed: 50,
             level: 1,
             type: `normal`,
-            experience: 5,
+            experience: 0,
             rarity: 5,
         },
 
@@ -71,13 +71,30 @@
             player.team[0].level++
         }
     }
+    let test = new GameItems(`Rare Candy`, 1000)
+    const testFunction = () => {
+        console.log(player.team[0].level)
+        console.log(test.increaseLevel())
+        console.log(player.team[0].level)
+        console.log(player.team)
+        battleLogic.fightOutcome()
+    }
     
     // base logic that will probably be reused a lot 
     const baseLogic = {
         randomNum: function(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         },
+        gainExp: function() {
+            
+        },
+        levelUp: function() {
+            for(let i = 0; i < player.team.length; i++) {
+                if (player.team[i].experience) {
 
+                }
+            }
+        }
     }
 
     const pickStarter = {
@@ -118,45 +135,21 @@
                 player.team.push(pokemon[3])
                 comp.team.push(pokemon[1])
             }
-            console.log(player.team[0])
-            console.log(comp.team[0])
+            console.log(player.team)
+            console.log(comp.team)
         }
     }
     
     const player = {
-        team: [],
+        name: `Rae`,
+        team: [pokemon[0], pokemon[4]],
         caught: [],
-        items: [
-            {
-                name: `Potion`,
-                health: 20,
-                amount: 10,
-                price: 100,
-            },
-            {
-                name: `Super Potion`,
-                health: 60,
-                amount: 0,
-                price: 150,
-            },
-            {
-                name: `Hyper Potion`,
-                health: 120,
-                amount: 0,
-                price: 200,
-            },
-            {
-                name: `Max Potion`,
-                health: player.team[0].overallHealth,
-                amount: 0,
-                price: 250,
-
-            }
-        ],
+        items: [],
         pokeballs: [],
     }
 
     const comp = {
+        name: `Gary`,
         team: [],
         items: [],
     }
@@ -414,9 +407,25 @@
         },
         heal: function() {
 
+        },
+        fightOutcome: function() {
+            let playerSum = 0
+            let compSum = 0
+            for(let i = 0; i < player.team.length; i++) {
+                playerSum += player.team[i].health
+                if (playerSum <= 0) {
+                    console.log(`You lose`)
+                }
+            }
+            for(let i = 0; i < comp.team.length; i++) {
+                compSum += comp.team[i].health
+                if (compSum <= 0) {
+                    console.log(`${comp.name}'s ${comp.team[0].name} has fainted.`)
+                }
+            }
+            console.log(playerSum, compSum)
         }
     }
-
     const catchLogic = {
 
     }
