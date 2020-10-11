@@ -1,8 +1,9 @@
 // $(() => {
 
     const pokemon = [
-        pikachu = {
+        {
             name: `Pikachu`,
+            overallHealth: 48,
             health: 48,
             attack: 50,
             speed: 100,
@@ -11,8 +12,9 @@
             experience: 5,
             rarity: 3,
         },
-        bulbasaur = {
+        {
             name: 'Bulbasaur',
+            overallHealth: 50,
             health: 50,
             attack: 40,
             speed: 50,
@@ -21,8 +23,9 @@
             experience: 5,
             rarity: 4,
         },
-        charmander = {
+        {
             name: 'Charmander',
+            overallHealth: 60,
             health: 60,
             attack: 60,
             speed: 60,
@@ -31,8 +34,9 @@
             experience: 5,
             rarity: 4,
         },
-        squirtle = {
+        {
             name: 'Squirtle',
+            overallHealth: 70,
             health: 70,
             attack: 50,
             speed: 40,
@@ -41,8 +45,9 @@
             experience: 5,
             rarity: 4,
         },
-        eevee = {
+        {
             name: 'Eevee',
+            overallHealth: 50,
             health: 50,
             attack: 50,
             speed: 50,
@@ -53,6 +58,19 @@
         },
 
     ]
+
+    class GameItems {
+        constructor(name, price, health, strength) {
+            this.name = name;
+            this.price = price;
+            this.health = health || 0;
+            this.strength = strength || 0;
+        }
+
+        increaseLevel() {
+            player.team[0].level++
+        }
+    }
     
     // base logic that will probably be reused a lot 
     const baseLogic = {
@@ -106,10 +124,35 @@
     }
     
     const player = {
-        itemCounter: '',
         team: [],
         caught: [],
-        items: [],
+        items: [
+            {
+                name: `Potion`,
+                health: 20,
+                amount: 10,
+                price: 100,
+            },
+            {
+                name: `Super Potion`,
+                health: 60,
+                amount: 0,
+                price: 150,
+            },
+            {
+                name: `Hyper Potion`,
+                health: 120,
+                amount: 0,
+                price: 200,
+            },
+            {
+                name: `Max Potion`,
+                health: player.team[0].overallHealth,
+                amount: 0,
+                price: 250,
+
+            }
+        ],
         pokeballs: [],
     }
 
@@ -119,6 +162,7 @@
     }
     const battleLogic = {
         types: [`water`, `fire`, `electric`, `normal`, `dragon`, `fairy`, `grass`, `ground`, `rock`, `ice`, `flying`, `fighting`, `poison`, `psychic`, `bug`, `steel`, `ghost`, `dark`],
+        // Very long battle function that takes 2 parameters and depending on the type of the pokemon, will do damage accordingly
         typeFight: function(attacker, defender) {
             if (attacker.team[0].type === `normal` && defender.team[0].type === `rock`) {
                 console.log(defender.team[0].health -= attacker.team[0].attack / 2)
@@ -367,7 +411,10 @@
             } else {
                 console.log(defender.team[0].health -= attacker.team[0].attack)
             }
-        },  
+        },
+        heal: function() {
+
+        }
     }
 
     const catchLogic = {
