@@ -59,6 +59,7 @@
 
     ]
 
+    // class that makes items with specific attributes
     class GameItems {
         constructor(name, price, health, strength) {
             this.name = name;
@@ -73,10 +74,6 @@
     }
     let test = new GameItems(`Rare Candy`, 1000)
     const testFunction = () => {
-        console.log(player.team[0].level)
-        console.log(test.increaseLevel())
-        console.log(player.team[0].level)
-        console.log(player.team)
         battleLogic.fightOutcome()
     }
     
@@ -97,6 +94,7 @@
         }
     }
 
+    // function that pushes the starter you chose into the player team array and only lets you choose 1 starter
     const pickStarter = {
         pickPika: function() {
             if (player.team.length === 1) {
@@ -143,7 +141,7 @@
     const player = {
         name: `Rae`,
         fainted: [],
-        team: [pokemon[0], pokemon[4]],
+        team: [],
         caught: [],
         items: [],
         pokeballs: [],
@@ -155,6 +153,8 @@
         team: [],
         items: [],
     }
+
+    // overall logic for the battle
     const battleLogic = {
         types: [`water`, `fire`, `electric`, `normal`, `dragon`, `fairy`, `grass`, `ground`, `rock`, `ice`, `flying`, `fighting`, `poison`, `psychic`, `bug`, `steel`, `ghost`, `dark`],
         // Very long battle function that takes 2 parameters and depending on the type of the pokemon, will do damage accordingly
@@ -407,9 +407,33 @@
                 console.log(defender.team[0].health -= attacker.team[0].attack)
             }
         },
+        // heals the pokemon when needed
         heal: function() {
 
         },
+        // logic for a player and computer loss
+        loseLogic: function() {
+            if (player.team.length === 0) {
+                alert(`You have no Pokémon left and were transported to the Pokécenter`)
+                for(let i = 0; i < player.fainted.length; i++) {
+                    player.fainted[i].health = player.fainted[i].overallHealth
+                    player.team.push(player.fainted[i])
+                    player.fainted.shift()
+                    console.log(player.team)
+                    console.log(player.fainted)
+                }
+            } else if (comp.team.length === 0) {
+                alert(`You have won the battle`)
+                for(let i = 0; i < comp.fainted.length; i++) {
+                    comp.fainted[i].health = comp.fainted[i].overallHealth
+                    comp.team.push(comp.fainted[i])
+                    comp.fainted.shift()
+                    console.log(comp.team)
+                    console.log(comp.fainted)
+                }
+            }
+        },
+        // renders fainted pokemon useless by pushing them into a separate array so you can't keep fighting with a fainted pokemon
         fightOutcome: function() {
             let playerSum = 0
             let compSum = 0
@@ -417,10 +441,8 @@
                 playerSum += player.team[i].health
                 if (playerSum <= 0) {
                     player.fainted.push(player.team[0])
-                    comp.team.shift()
+                    player.team.shift()
                     console.log(`Your ${player.fainted[0].name} has fainted.`)
-                    console.log(player.team)
-                    console.log(player.fainted)
                 }
             }
             for(let i = 0; i < comp.team.length; i++) {
@@ -432,8 +454,10 @@
                 }
             }
             console.log(playerSum, compSum)
+            this.loseLogic()
         }
     }
+    // general logic for catching pokemon
     const catchLogic = {
 
     }
