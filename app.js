@@ -142,6 +142,7 @@
     
     const player = {
         name: `Rae`,
+        fainted: [],
         team: [pokemon[0], pokemon[4]],
         caught: [],
         items: [],
@@ -150,6 +151,7 @@
 
     const comp = {
         name: `Gary`,
+        fainted: [],
         team: [],
         items: [],
     }
@@ -414,13 +416,19 @@
             for(let i = 0; i < player.team.length; i++) {
                 playerSum += player.team[i].health
                 if (playerSum <= 0) {
-                    console.log(`You lose`)
+                    player.fainted.push(player.team[0])
+                    comp.team.shift()
+                    console.log(`Your ${player.fainted[0].name} has fainted.`)
+                    console.log(player.team)
+                    console.log(player.fainted)
                 }
             }
             for(let i = 0; i < comp.team.length; i++) {
                 compSum += comp.team[i].health
                 if (compSum <= 0) {
-                    console.log(`${comp.name}'s ${comp.team[0].name} has fainted.`)
+                    comp.fainted.push(comp.team[0])
+                    comp.team.shift()
+                    console.log(`${comp.name}'s ${comp.fainted[0].name} has fainted.`)
                 }
             }
             console.log(playerSum, compSum)
