@@ -1,5 +1,4 @@
-// $(() => {
-
+$(() => {
     const pokemon = [
         {
             name: `Pikachu`,
@@ -11,6 +10,7 @@
             type: `electric`,
             experience: 0,
             rarity: 3,
+            isFainted: false
         },
         {
             name: 'Bulbasaur',
@@ -22,6 +22,7 @@
             type: `grass`,
             experience: 0,
             rarity: 4,
+            isFainted: false
         },
         {
             name: 'Charmander',
@@ -33,6 +34,7 @@
             type: `fire`,
             experience: 0,
             rarity: 4,
+            isFainted: false
         },
         {
             name: 'Squirtle',
@@ -44,6 +46,7 @@
             type: `water`,
             experience: 0,
             rarity: 4,
+            isFainted: false
         },
         {
             name: 'Eevee',
@@ -55,12 +58,14 @@
             type: `normal`,
             experience: 0,
             rarity: 5,
+            isFainted: false
         },
 
     ]
 
     // class that makes items with specific attributes
     class GameItems {
+        // health is for potions, strength is for how powerful a pokeball is
         constructor(name, price, health, strength) {
             this.name = name;
             this.price = price;
@@ -71,12 +76,13 @@
         increaseLevel() {
             player.team[0].level++
         }
+
+        heal(user) {
+            user.team[0].health += this.health
+        }
     }
     let test = new GameItems(`Rare Candy`, 1000)
-    const testFunction = () => {
-        battleLogic.fightOutcome()
-    }
-    
+
     // base logic that will probably be reused a lot 
     const baseLogic = {
         randomNum: function(min, max) {
@@ -408,61 +414,55 @@
             }
         },
         // heals the pokemon when needed
-        heal: function() {
-
+        heal: function(user) {
+            if (user.team.length === 0) {
+                for(let i = 0; i < user.fainted.length; i++) {
+                    user.fainted[i].health = user.fainted[i].overallHealth
+                    user.team.push(user.fainted[i])
+                }
+            }
         },
         // logic for a player and computer loss
-        loseLogic: function() {
-            if (player.team.length === 0) {
+        fightOutcome: function() {
+            if (player.team.length === 0 && comp.team.length >= 1) {
                 alert(`You have no Pokémon left and were transported to the Pokécenter`)
-                for(let i = 0; i < player.fainted.length; i++) {
-                    player.fainted[i].health = player.fainted[i].overallHealth
-                    player.team.push(player.fainted[i])
-                    player.fainted.shift()
-                    console.log(player.team)
-                    console.log(player.fainted)
-                }
-            } else if (comp.team.length === 0) {
+                this.heal(player)
+                this.heal(comp)
+                return
+            } else if (comp.team.length === 0 && player.team.length >= 1) {
                 alert(`You have won the battle`)
-                for(let i = 0; i < comp.fainted.length; i++) {
-                    comp.fainted[i].health = comp.fainted[i].overallHealth
-                    comp.team.push(comp.fainted[i])
-                    comp.fainted.shift()
-                    console.log(comp.team)
-                    console.log(comp.fainted)
-                }
+                this.heal(comp)
+                return
             }
         },
-        // renders fainted pokemon useless by pushing them into a separate array so you can't keep fighting with a fainted pokemon
-        fightOutcome: function() {
-            let playerSum = 0
-            let compSum = 0
-            for(let i = 0; i < player.team.length; i++) {
-                playerSum += player.team[i].health
-                if (playerSum <= 0) {
-                    player.fainted.push(player.team[0])
-                    player.team.shift()
-                    console.log(`Your ${player.fainted[0].name} has fainted.`)
+        // applies a fainted value if a pokemon's health is 0 or less and moves them to a different array.
+        faintLogic: function(user) {
+            if (user.team[0].health <= 0) {
+                user.team[0].isFainted = true
+                if (user.team[0].isFainted === true) {
+                    user.fainted.push(user.team[0])
+                    user.team.shift()
                 }
-            }
-            for(let i = 0; i < comp.team.length; i++) {
-                compSum += comp.team[i].health
-                if (compSum <= 0) {
-                    comp.fainted.push(comp.team[0])
-                    comp.team.shift()
-                    console.log(`${comp.name}'s ${comp.fainted[0].name} has fainted.`)
-                }
-            }
-            console.log(playerSum, compSum)
-            this.loseLogic()
-        }
+            } 
+        },
     }
     // general logic for catching pokemon
     const catchLogic = {
 
     }
 
+    const testFunction = () => {
+        battleLogic.faintLogic(player)
+        battleLogic.faintLogic(comp)
+        battleLogic.fightOutcome()
+    }
 
-
-
-// })
+    // event listeners
+    $(`#pik`).on(`click`, pickStarter.pickPika)
+    $(`#char`).on(`click`, pickStarter.pickChar)
+    $(`#squir`).on(`click`, pickStarter.pickSquirtle)
+    $(`#bulb`).on(`click`, pickStarter.pickBulb)
+    $(`#fight`).on(`click`, () => {battleLogic.typeFight(player, comp)})
+    $(`#end`).on(`click`, () => {battleLogic.typeFight(comp, player)})
+    $(`#test`).on(`click`, testFunction)
+})
