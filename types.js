@@ -248,4 +248,3 @@ const typeFight = (attacker, defender) => {
         console.log(defender.team[0].health -= attacker.team[0].attack)
     }
 }
-

@@ -89,16 +89,6 @@ $(() => {
         randomNum: function(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         },
-        gainExp: function() {
-            
-        },
-        levelUp: function() {
-            for(let i = 0; i < player.team.length; i++) {
-                if (player.team[i].experience) {
-
-                }
-            }
-        }
     }
 
     // function that pushes the starter you chose into the player team array and only lets you choose 1 starter
@@ -107,8 +97,8 @@ $(() => {
             if (player.team.length === 1) {
                 console.log(`You got a Pikachu!`)
             } else {
-                player.team.push(pokemon[0])
-                comp.team.push(pokemon[4])
+                player.team.unshift(pokemon[0])
+                comp.team.unshift(pokemon[4])
             }
             console.log(player.team)
             console.log(comp.team)
@@ -117,8 +107,8 @@ $(() => {
             if (player.team.length === 1) {
                 console.log(`You got a Bulbasaur!`)
             } else {
-                player.team.push(pokemon[1])
-                comp.team.push(pokemon[2])
+                player.team.unshift(pokemon[1])
+                comp.team.unshift(pokemon[2])
             } 
             console.log(player.team)
             console.log(comp.team)
@@ -127,8 +117,8 @@ $(() => {
             if (player.team.length === 1) {
                 console.log(`You got a Charmander!`)
             } else {
-                player.team.push(pokemon[2])
-                comp.team.push(pokemon[3])
+                player.team.unshift(pokemon[2])
+                comp.team.unshift(pokemon[3])
             }
             console.log(player.team)
             console.log(comp.team)
@@ -137,8 +127,8 @@ $(() => {
             if (player.team.length === 1) {
                 console.log(`You got a Squirtle!`)
             } else {
-                player.team.push(pokemon[3])
-                comp.team.push(pokemon[1])
+                player.team.unshift(pokemon[3])
+                comp.team.unshift(pokemon[1])
             }
             console.log(player.team)
             console.log(comp.team)
@@ -148,7 +138,7 @@ $(() => {
     const player = {
         name: `Rae`,
         fainted: [],
-        team: [],
+        team: [pokemon[2], pokemon[1]],
         caught: [],
         items: [],
         pokeballs: [],
@@ -171,15 +161,7 @@ $(() => {
                     user.fainted[i].health = user.fainted[i].overallHealth
                     user.team.push(user.fainted[i])
                 }
-            }
-        },
-        win: function() {
-            levelUp()
-            for (let i = 0; i < player.team.length; i++) {
-                if (player.team[i].experience % 10 === 0) {
-                    console.log(`Your ${player.team[i].name} has leveled up! Health: ${player.team[i].overallHealth} Attack damage: ${player.team[i].attack} Speed: ${player.team[i].speed}`)
-                }
-            }
+            } 
         },
         // logic for a player and computer loss
         fightOutcome: function() {
@@ -190,11 +172,11 @@ $(() => {
                 return
             } else if (comp.team.length === 0 && player.team.length >= 1) {
                 alert(`You have won the battle`)
+                console.log(player.team.length)
                 for(let i = 0; i < player.team.length; i++) {
                     player.team[i].experience += 5
-                    this.win()
-                    console.log(player.team[i].experience)
                 }
+                levelUp()
                 this.resetHealth(comp)
                 return
             }
@@ -203,6 +185,7 @@ $(() => {
         faintLogic: function(user) {
             if (user.team[0].health <= 0) {
                 user.team[0].isFainted = true
+                console.log(`${user.name}'s ${user.team[0].name} has fainted`)
                 if (user.team[0].isFainted === true) {
                     user.fainted.push(user.team[0])
                     user.team.shift()
@@ -223,6 +206,7 @@ $(() => {
                 player.team[i].health = player.team[i].overallHealth
                 player.team[i].attack += 5
                 player.team[i].speed += 5
+                console.log(`Your ${player.team[i].name} has leveled up! Health: ${player.team[i].overallHealth} Attack damage: ${player.team[i].attack} Speed: ${player.team[i].speed}`)
             }
         }
     }
