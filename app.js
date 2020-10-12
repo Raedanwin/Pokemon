@@ -192,6 +192,13 @@ $(() => {
                 }
             } 
         },
+        fightMain: function() {
+            typeFight(player, comp)
+            typeFight(comp, player)
+            battleLogic.faintLogic(player)
+            battleLogic.faintLogic(comp)
+            battleLogic.fightOutcome()
+        }
     }
     // general logic for catching pokemon
     const catchLogic = {
@@ -222,7 +229,5 @@ $(() => {
     $(`#char`).on(`click`, pickStarter.pickChar)
     $(`#squir`).on(`click`, pickStarter.pickSquirtle)
     $(`#bulb`).on(`click`, pickStarter.pickBulb)
-    $(`#fight`).on(`click`, () => {typeFight(player, comp)})
-    $(`#end`).on(`click`, () => {typeFight(comp, player)})
-    $(`#test`).on(`click`, testFunction)
+    $(`#fight`).on(`click`, battleLogic.fightMain)
 })
