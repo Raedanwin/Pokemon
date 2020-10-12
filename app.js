@@ -74,7 +74,7 @@ $(() => {
         }
 
         increaseLevel() {
-            player.team[0].level++
+            player.team[0].experience += 10
         }
 
         heal(user) {
@@ -422,6 +422,14 @@ $(() => {
                 }
             }
         },
+        win: function() {
+            levelUp()
+            for (let i = 0; i < player.team.length; i++) {
+                if (player.team[i].experience % 10 === 0) {
+                    console.log(`Your ${player.team[i].name} has leveled up! Health: ${player.team[i].overallHealth} Attack damage: ${player.team[i].attack} Speed: ${player.team[i].speed}`)
+                }
+            }
+        },
         // logic for a player and computer loss
         fightOutcome: function() {
             if (player.team.length === 0 && comp.team.length >= 1) {
@@ -433,7 +441,7 @@ $(() => {
                 alert(`You have won the battle`)
                 for(let i = 0; i < player.team.length; i++) {
                     player.team[i].experience += 5
-                    levelUp()
+                    this.win()
                     console.log(player.team[i].experience)
                 }
                 this.resetHealth(comp)
@@ -465,7 +473,6 @@ $(() => {
                 player.team[i].attack += 5
                 player.team[i].speed += 5
             }
-            console.log(player.team[i])
         }
     }
 
