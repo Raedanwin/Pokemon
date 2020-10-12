@@ -414,7 +414,7 @@ $(() => {
             }
         },
         // heals the pokemon when needed
-        heal: function(user) {
+        resetHealth: function(user) {
             if (user.team.length === 0) {
                 for(let i = 0; i < user.fainted.length; i++) {
                     user.fainted[i].health = user.fainted[i].overallHealth
@@ -425,13 +425,18 @@ $(() => {
         // logic for a player and computer loss
         fightOutcome: function() {
             if (player.team.length === 0 && comp.team.length >= 1) {
-                alert(`You have no Pokémon left and were transported to the Pokécenter`)
-                this.heal(player)
-                this.heal(comp)
+                alert(`All your Pokemon fainted and you rushed to the Pokécenter`)
+                this.resetHealth(player)
+                this.resetHealth(comp)
                 return
             } else if (comp.team.length === 0 && player.team.length >= 1) {
                 alert(`You have won the battle`)
-                this.heal(comp)
+                for(let i = 0; i < player.team.length; i++) {
+                    player.team[i].experience += 5
+                    levelUp()
+                    console.log(player.team[i].experience)
+                }
+                this.resetHealth(comp)
                 return
             }
         },
@@ -449,6 +454,19 @@ $(() => {
     // general logic for catching pokemon
     const catchLogic = {
 
+    }
+
+    const levelUp = () => {
+        for (let i = 0; i < player.team.length; i++) {
+            if (player.team[i].experience % 10 === 0) {
+                player.team[i].level++
+                player.team[i].overallHealth += 5
+                player.team[i].health = player.team[i].overallHealth
+                player.team[i].attack += 5
+                player.team[i].speed += 5
+            }
+            console.log(player.team[i])
+        }
     }
 
     const testFunction = () => {
