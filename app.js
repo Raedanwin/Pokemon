@@ -89,6 +89,9 @@ $(() => {
         randomNum: function(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         },
+        continueFunc: function() {
+            
+        }
     }
 
     // function that pushes the starter you chose into the player team array and only lets you choose 1 starter
@@ -147,7 +150,7 @@ $(() => {
     const comp = {
         name: `Gary`,
         fainted: [],
-        team: [],
+        team: [pokemon[3], pokemon[1]],
         items: [],
     }
 
@@ -165,20 +168,20 @@ $(() => {
         },
         // logic for a player and computer loss
         fightOutcome: function() {
+            
             if (player.team.length === 0 && comp.team.length >= 1) {
                 alert(`All your Pokemon fainted and you rushed to the Pokécenter`)
                 this.resetHealth(player)
                 this.resetHealth(comp)
-                return
+                
             } else if (comp.team.length === 0 && player.team.length >= 1) {
                 alert(`You have won the battle`)
-                console.log(player.team.length)
                 for(let i = 0; i < player.team.length; i++) {
                     player.team[i].experience += 5
                 }
                 levelUp()
-                this.resetHealth(comp)
-                return
+                this.resetHealth(comp)  
+                
             }
         },
         // applies a fainted value if a pokemon's health is 0 or less and moves them to a different array.
@@ -194,7 +197,9 @@ $(() => {
         },
         fightMain: function() {
             typeFight(player, comp)
-            typeFight(comp, player)
+            if (comp.team[0].health > 0) {
+                typeFight(comp, player)
+            }
             battleLogic.faintLogic(player)
             battleLogic.faintLogic(comp)
             battleLogic.fightOutcome()
@@ -218,10 +223,21 @@ $(() => {
         }
     }
 
-    const testFunction = () => {
-        battleLogic.faintLogic(player)
-        battleLogic.faintLogic(comp)
-        battleLogic.fightOutcome()
+    // const testFunction = () => {
+    //     htmlLogic.first()
+    // }
+
+    const htmlLogic = {
+        beginning: $(`<div>`),
+        continueButton: $(`<button>`).text(`continue`).on(`click`, () => {baseLogic.continueFunc()}),
+        first: function() {
+            $(`<h3>`).text(`Gary: Wake up ${player.name}, today's the day we get our pokemon! We should head to Professor Oak's lab right away. Race you there!`).appendTo(this.beginning),
+            $(`#container`).append(this.beginning)
+            $(`#container`).append(this.continueButton)
+        },
+        second: function() {
+            console.log(`is this thing on?`)
+        }
     }
 
     // event listeners
@@ -230,4 +246,6 @@ $(() => {
     $(`#squir`).on(`click`, pickStarter.pickSquirtle)
     $(`#bulb`).on(`click`, pickStarter.pickBulb)
     $(`#fight`).on(`click`, battleLogic.fightMain)
+    // $(`#test`).on(`click`, testFunction)
+    htmlLogic.first()
 })
