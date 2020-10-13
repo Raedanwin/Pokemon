@@ -141,7 +141,7 @@ $(() => {
     const player = {
         name: `Rae`,
         fainted: [],
-        team: [pokemon[2], pokemon[1]],
+        team: [],
         caught: [],
         items: [],
         pokeballs: [],
@@ -150,7 +150,7 @@ $(() => {
     const comp = {
         name: `Gary`,
         fainted: [],
-        team: [pokemon[3], pokemon[1]],
+        team: [],
         items: [],
     }
 
@@ -224,20 +224,24 @@ $(() => {
     }
 
     // const testFunction = () => {
-    //     htmlLogic.first()
+    //     htmlLogic.second()
     // }
 
     const htmlLogic = {
-        beginning: $(`<div>`),
-        continueButton: $(`<button>`).text(`continue`).on(`click`, () => {baseLogic.continueFunc()}),
         first: function() {
-            $(`<h3>`).text(`Gary: Wake up ${player.name}, today's the day we get our pokemon! We should head to Professor Oak's lab right away. Race you there!`).appendTo(this.beginning),
-            $(`#container`).append(this.beginning)
-            $(`#container`).append(this.continueButton)
+            $(`<h3>`).text(`Gary: Wake up ${player.name}, today's the day we get our pokemon! We should head to Professor Oak's lab right away. Race you there!`).appendTo(`#container`)
         },
         second: function() {
-            console.log(`is this thing on?`)
-        }
+            $(`#container`).empty()
+            $(`<button>`).text(`Pikachu`).on(`click`, pickStarter.pickPika).appendTo(`#container`)
+            $(`<button>`).text(`Charmander`).on(`click`, pickStarter.pickChar).appendTo(`#container`)
+            $(`<button>`).text(`Bulbasaur`).on(`click`, pickStarter.pickBulb).appendTo(`#container`)
+            $(`<button>`).text(`Squirtle`).on(`click`, pickStarter.pickSquirtle).appendTo(`#container`)
+            $(`body`).addClass(`screenII`)
+            $(`<h3>`).html(`Professor Oak: You're early today, eager to get your hands on some pokemon are you? <br> Gary and ${player.name}: Yup! <br>Professor Oak: There are a few pokemon over there, why don't you go take your pick`).appendTo(`#container`)
+        },
+
+        
     }
 
     // event listeners
@@ -247,5 +251,6 @@ $(() => {
     $(`#bulb`).on(`click`, pickStarter.pickBulb)
     $(`#fight`).on(`click`, battleLogic.fightMain)
     // $(`#test`).on(`click`, testFunction)
-    htmlLogic.first()
+    $(htmlLogic.first).on(`click`, htmlLogic.second)
+
 })

@@ -1,6 +1,6 @@
 body {
     background: url('https://i.imgur.com/Hp0cqHh.jpg') center fixed no-repeat;
-    background-size: cover;
+    background-size: 700px 800px;
     background-color: black;
     color: black;
     height: 100vh;
@@ -14,4 +14,11 @@ body {
     border-radius: 25px;
     text-align: center;
     overflow: hidden;
+}
+
+.screenII {
+    background: url('https://i.imgur.com/lnMHRJF.jpg') center fixed no-repeat;
+    background-size: 1400px 1000px;
+    background-color: black;
+    height: 100vh;
 }
