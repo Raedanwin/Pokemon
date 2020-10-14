@@ -173,7 +173,7 @@ $(() => {
                 alert(`All your Pokemon fainted and you rushed to the Pokécenter`)
                 this.resetHealth(player)
                 this.resetHealth(comp)
-                
+                htmlLogic.lose()
             } else if (comp.team.length === 0 && player.team.length >= 1) {
                 alert(`You have won the battle`)
                 for(let i = 0; i < player.team.length; i++) {
@@ -181,7 +181,7 @@ $(() => {
                 }
                 levelUp()
                 this.resetHealth(comp)  
-                
+                htmlLogic.win()
             }
         },
         // applies a fainted value if a pokemon's health is 0 or less and moves them to a different array.
@@ -265,7 +265,7 @@ $(() => {
             $(`<div>`).attr(`id`, `fightCon`).appendTo(`#container`)
             $(`<div>`).attr(`id`, `buttonCon`).appendTo(`#container`)
             $(`<h2>`).text(`What will ${player.team[0].name} do?`).appendTo(`#fightCon`)
-            $(`<button>`).text(`Fight`).addClass(`fightB`).attr(`id`, `fight`).appendTo(`#buttonCon`)
+            $(`<button>`).text(`Fight`).addClass(`fightB`).attr(`id`, `fight`).on(`click`, battleLogic.fightMain).appendTo(`#buttonCon`)
             $(`<button>`).text(`Bag`).addClass(`fightB`).attr(`id`, `bag`).appendTo(`#buttonCon`)
             $(`<button>`).text(`Pokémon`).addClass(`fightB`).attr(`id`, `poke`).appendTo(`#buttonCon`)
             $(`<button>`).text(`Run`).addClass(`fightB`).attr(`id`, `run`).appendTo(`#buttonCon`)
@@ -274,21 +274,41 @@ $(() => {
                 event.stopPropagation()
             })       
         },
+        lose: function() {
+            $(`#container`).empty()
+            $(`#container`).css({background: `white`})
+            $(`<h3>`).text(`Gary: That was a good battle but I told you I had the type advantage haha. Better luck next time!`).appendTo(`#container`)
+            $(`#container`).on(`click`, htmlLogic.seventh)
+        },
+        win: function() {
+            $(`#container`).empty()
+            $(`#container`).css({background: `white`})
+            $(`<h3>`).text(`Gary: Man, even with my type advantage you still beat me! You're gonna be a super trainer one day!`).appendTo(`#container`)
+            $(`#container`).on(`click`, htmlLogic.seventh)
+        },
         seventh: function() {
             $(`#container`).empty()
-            $(`<h3>`).text(`test`).appendTo(`#container`)
+            $(`<h3>`).text(`Gary: We should head off on our Pokémon training adventure now! See you at the next town ${player.name}!`).appendTo(`#container`)
             $(`#container`).css({background: `white`})
+            $(`#container`).on(`click`, htmlLogic.eighth)
+        },
+        eighth: function() {
+            $(`#container`).empty()
+            $(`<h3>`).html(`Professor Oak: Wait! Before you two go, take these. These are called Pokédexes. They're used to identify and document every pokémon you encounter, so be sure to catch em' all!<br> Gary and ${player.name}: Thanks! We'll try our best!`).appendTo(`#container`)
+            $(`#container`).on(`click`, htmlLogic.ninth)
+        },
+        ninth: function() {
+            $(`#container`).empty()
+            $(`<h3>`).html(`To be continued...`).appendTo(`#container`)
+            $(`#container`).on(`click`, htmlLogic.end)
+        },
+        end: function() {
+            location.reload()
         }
         
     }
 
     // event listeners
-    $(`#pik`).on(`click`, pickStarter.pickPika)
-    $(`#char`).on(`click`, pickStarter.pickChar)
-    $(`#squir`).on(`click`, pickStarter.pickSquirtle)
-    $(`#bulb`).on(`click`, pickStarter.pickBulb)
-    $(`#fight`).on(`click`, battleLogic.fightMain)
-    $(`#test`).on(`click`, testFunction)
     htmlLogic.first()
     $(`#container`).on(`click`, htmlLogic.second)
 })
