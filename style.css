@@ -11,7 +11,8 @@ body {
 }
 
 #container {
-    background-color: white;
+    /* background-color: white; */
+    background: linear-gradient(to bottom, #615F61 0%, #DBD8DB 50%, #615F61 100%);
     border: solid 5px skyblue;
     border-radius: 25px;
     text-align: center;
@@ -20,22 +21,19 @@ body {
 
 #fightCon {
     display: inline-block;
-    background-color: white;
-    border: solid 5px lightblue;
+    background: linear-gradient(to bottom, #615F61 0%, #DBD8DB 50%, #615F61 100%);
     border-radius: 25px;
     text-align: center;
     overflow: hidden;
-    height: 100%;
-    width: 49%;
-    padding: 0;
+    height: 80px;
+    width: 50%;
+    padding: 0px;
     margin: 0;
 }
 
 #buttonCon {
     display: inline-block;
-    background-color: white;
-    border: solid 5px lightblue;
-    border-radius: 25px;
+    background: linear-gradient(to bottom, #615F61 0%, #DBD8DB 50%, #615F61 100%);
     overflow: hidden;
     height: 100%;
     width: 49%;
@@ -46,6 +44,35 @@ body {
 .starterB {
     margin: -5px 10px 5px 10px;
     font-size: large;
+}
+
+.fightB {
+    height: 50%;
+    width: 49%;
+    padding: 5px;
+    margin: 1px;
+    border-radius: 25px;
+    font-size: large;
+}
+
+#fight {
+    border: groove 5px rgb(191, 65, 62);
+    background-color: lightpink;
+
+}
+
+#bag {
+    border: groove 5px rgb(128, 106, 0);
+    background: linear-gradient(to bottom, #E09728 0%, #896837 100%);
+}
+
+#poke {
+    border: groove 5px darkgreen;
+    background: linear-gradient(to bottom, #5AAE2B 0%, #4c7046 100%);}
+
+#run {
+    border: groove 5px navy;
+    background: linear-gradient(to bottom, #2891C8 0%, #415871 100%);
 }
 
 .screenII {

@@ -265,7 +265,10 @@ $(() => {
             $(`<div>`).attr(`id`, `fightCon`).appendTo(`#container`)
             $(`<div>`).attr(`id`, `buttonCon`).appendTo(`#container`)
             $(`<h2>`).text(`What will ${player.team[0].name} do?`).appendTo(`#fightCon`)
-            $(`<h2>`).text(`What will ${player.team[0].name} do?`).appendTo(`#buttonCon`)
+            $(`<button>`).text(`Fight`).addClass(`fightB`).attr(`id`, `fight`).appendTo(`#buttonCon`)
+            $(`<button>`).text(`Bag`).addClass(`fightB`).attr(`id`, `bag`).appendTo(`#buttonCon`)
+            $(`<button>`).text(`Pokémon`).addClass(`fightB`).attr(`id`, `poke`).appendTo(`#buttonCon`)
+            $(`<button>`).text(`Run`).addClass(`fightB`).attr(`id`, `run`).appendTo(`#buttonCon`)
         }
         
     }
