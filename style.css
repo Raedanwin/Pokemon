@@ -5,9 +5,11 @@ body {
     color: black;
     height: 100vh;
 }
+
 .whiteSpace {
     height: 80vh;
 }
+
 #container {
     background-color: white;
     border: solid 5px skyblue;
@@ -16,9 +18,50 @@ body {
     overflow: hidden;
 }
 
+#fightCon {
+    display: inline-block;
+    background-color: white;
+    border: solid 5px lightblue;
+    border-radius: 25px;
+    text-align: center;
+    overflow: hidden;
+    height: 100%;
+    width: 49%;
+    padding: 0;
+    margin: 0;
+}
+
+#buttonCon {
+    display: inline-block;
+    background-color: white;
+    border: solid 5px lightblue;
+    border-radius: 25px;
+    overflow: hidden;
+    height: 100%;
+    width: 49%;
+    padding: 0px;
+    margin: 0px;
+}
+
+.starterB {
+    margin: -5px 10px 5px 10px;
+    font-size: large;
+}
+
 .screenII {
     background: url('https://i.imgur.com/lnMHRJF.jpg') center fixed no-repeat;
     background-size: 1400px 1000px;
     background-color: black;
     height: 100vh;
+}
+
+.screenIII {
+    background: url('https://i.imgur.com/6glN2wJ.jpg') center fixed no-repeat;
+    background-size: cover;
+    background-color: black;
+    height: 100vh;
+}
+
+.screenIIII {
+
 }

@@ -230,25 +230,42 @@ $(() => {
     const htmlLogic = {
         first: function() {
             $(`#container`).empty()
-            // $(`<div>`).attr(`id`, `textBox1`).appendTo(`#container`)
             $(`<h3>`).text(`Gary: Wake up ${player.name}, today's the day we get our pokemon! We should head to Professor Oak's lab right away. Race you there!`).appendTo(`#container`)
         },
         second: function() {
             $(`#container`).empty()
-            // $(`#textBox1`).empty()
-            // $(`<div>`).attr(`id`, `textBox2`).appendTo(`#container`)
             $(`body`).addClass(`screenII`)
             $(`<h3>`).html(`Professor Oak: You're early today, eager to get your hands on some pokemon are you? <br> Gary and ${player.name}: Yup! <br>Professor Oak: There are a few pokemon over there, why don't you go take your pick`).appendTo(`#container`)
+            $(`#container`).on(`click`, htmlLogic.third)
         },
         third: function() {
-            // $(`#textBox2`).empty()
             $(`#container`).empty()
-            // $(`<div>`).attr(`id`, `textBox3`).appendTo(`#container`)
             $(`body`).addClass(`screenII`)
-            $(`<button>`).text(`Pikachu`).on(`click`, pickStarter.pickPika).appendTo(`#container`)
-            $(`<button>`).text(`Charmander`).on(`click`, pickStarter.pickChar).appendTo(`#container`)
-            $(`<button>`).text(`Bulbasaur`).on(`click`, pickStarter.pickBulb).appendTo(`#container`)
-            $(`<button>`).text(`Squirtle`).on(`click`, pickStarter.pickSquirtle).appendTo(`#container`)
+            $(`<h4>`).text(`Pick your starter Pokémon.`).appendTo(`#container`)
+            $(`<button>`).addClass(`starterB`).text(`Pikachu`).on(`click`, pickStarter.pickPika).appendTo(`#container`)
+            $(`<button>`).addClass(`starterB`).text(`Charmander`).on(`click`, pickStarter.pickChar).appendTo(`#container`)
+            $(`<button>`).addClass(`starterB`).text(`Bulbasaur`).on(`click`, pickStarter.pickBulb).appendTo(`#container`)
+            $(`<button>`).addClass(`starterB`).text(`Squirtle`).on(`click`, pickStarter.pickSquirtle).appendTo(`#container`)
+            $(`#container`).on(`click`, htmlLogic.fourth)
+        },
+        fourth: function() {
+            $(`#container`).empty()
+            $(`body`).addClass(`screenIII`).removeClass(`screenII`)
+            $(`<h3>`).html(`Gary: Wow you got a ${player.team[0].name}?! That's so cool! I got a ${comp.team[0].name} though so I have the type advantage haha. <br> ${player.name}: Well if you're so confident, why don't we battle then? <br> Gary: You're on!`).appendTo(`#container`)
+            $(`#container`).on(`click`, htmlLogic.fifth)
+        },
+        fifth: function() {
+            $(`#container`).empty()
+            $(`<h3>`).html(`You challenged Gary to a battle!`).appendTo(`#container`)
+            setTimeout(htmlLogic.sixth, 1500)
+
+        },
+        sixth: function() {
+            $(`#container`).empty()
+            $(`<div>`).attr(`id`, `fightCon`).appendTo(`#container`)
+            $(`<div>`).attr(`id`, `buttonCon`).appendTo(`#container`)
+            $(`<h2>`).text(`What will ${player.team[0].name} do?`).appendTo(`#fightCon`)
+            $(`<h2>`).text(`What will ${player.team[0].name} do?`).appendTo(`#buttonCon`)
         }
         
     }
@@ -260,8 +277,6 @@ $(() => {
     $(`#bulb`).on(`click`, pickStarter.pickBulb)
     $(`#fight`).on(`click`, battleLogic.fightMain)
     $(`#test`).on(`click`, testFunction)
-    // $(htmlLogic.first).on(`click`, htmlLogic.second)
-    // $(`#container`).on(`click`, htmlLogic.second)
-    $(htmlLogic.second).on(`click`, htmlLogic.third)
-
+    htmlLogic.first()
+    $(`#container`).on(`click`, htmlLogic.second)
 })
