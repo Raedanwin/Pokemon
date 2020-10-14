@@ -257,11 +257,11 @@ $(() => {
         fifth: function() {
             $(`#container`).empty()
             $(`<h3>`).html(`You challenged Gary to a battle!`).appendTo(`#container`)
-            setTimeout(htmlLogic.sixth, 1500)
-
+            $(`#container`).on(`click`, htmlLogic.sixth)
         },
         sixth: function() {
             $(`#container`).empty()
+            $(`#container`).css({background: `linear-gradient(to bottom, #615F61 0%, #DBD8DB 50%, #615F61 100%)`})
             $(`<div>`).attr(`id`, `fightCon`).appendTo(`#container`)
             $(`<div>`).attr(`id`, `buttonCon`).appendTo(`#container`)
             $(`<h2>`).text(`What will ${player.team[0].name} do?`).appendTo(`#fightCon`)
@@ -269,6 +269,15 @@ $(() => {
             $(`<button>`).text(`Bag`).addClass(`fightB`).attr(`id`, `bag`).appendTo(`#buttonCon`)
             $(`<button>`).text(`Pokémon`).addClass(`fightB`).attr(`id`, `poke`).appendTo(`#buttonCon`)
             $(`<button>`).text(`Run`).addClass(`fightB`).attr(`id`, `run`).appendTo(`#buttonCon`)
+            $(`#container`).on(`click`, htmlLogic.seventh)
+            $(`.fightB`).on(`click`, function() {
+                event.stopPropagation()
+            })       
+        },
+        seventh: function() {
+            $(`#container`).empty()
+            $(`<h3>`).text(`test`).appendTo(`#container`)
+            $(`#container`).css({background: `white`})
         }
         
     }
