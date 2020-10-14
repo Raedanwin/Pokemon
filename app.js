@@ -223,24 +223,33 @@ $(() => {
         }
     }
 
-    // const testFunction = () => {
-    //     htmlLogic.second()
-    // }
+    const testFunction = () => {
+        htmlLogic.third()
+    }
 
     const htmlLogic = {
         first: function() {
+            $(`#container`).empty()
+            // $(`<div>`).attr(`id`, `textBox1`).appendTo(`#container`)
             $(`<h3>`).text(`Gary: Wake up ${player.name}, today's the day we get our pokemon! We should head to Professor Oak's lab right away. Race you there!`).appendTo(`#container`)
         },
         second: function() {
             $(`#container`).empty()
+            // $(`#textBox1`).empty()
+            // $(`<div>`).attr(`id`, `textBox2`).appendTo(`#container`)
+            $(`body`).addClass(`screenII`)
+            $(`<h3>`).html(`Professor Oak: You're early today, eager to get your hands on some pokemon are you? <br> Gary and ${player.name}: Yup! <br>Professor Oak: There are a few pokemon over there, why don't you go take your pick`).appendTo(`#container`)
+        },
+        third: function() {
+            // $(`#textBox2`).empty()
+            $(`#container`).empty()
+            // $(`<div>`).attr(`id`, `textBox3`).appendTo(`#container`)
+            $(`body`).addClass(`screenII`)
             $(`<button>`).text(`Pikachu`).on(`click`, pickStarter.pickPika).appendTo(`#container`)
             $(`<button>`).text(`Charmander`).on(`click`, pickStarter.pickChar).appendTo(`#container`)
             $(`<button>`).text(`Bulbasaur`).on(`click`, pickStarter.pickBulb).appendTo(`#container`)
             $(`<button>`).text(`Squirtle`).on(`click`, pickStarter.pickSquirtle).appendTo(`#container`)
-            $(`body`).addClass(`screenII`)
-            $(`<h3>`).html(`Professor Oak: You're early today, eager to get your hands on some pokemon are you? <br> Gary and ${player.name}: Yup! <br>Professor Oak: There are a few pokemon over there, why don't you go take your pick`).appendTo(`#container`)
-        },
-
+        }
         
     }
 
@@ -250,7 +259,9 @@ $(() => {
     $(`#squir`).on(`click`, pickStarter.pickSquirtle)
     $(`#bulb`).on(`click`, pickStarter.pickBulb)
     $(`#fight`).on(`click`, battleLogic.fightMain)
-    // $(`#test`).on(`click`, testFunction)
-    $(htmlLogic.first).on(`click`, htmlLogic.second)
+    $(`#test`).on(`click`, testFunction)
+    // $(htmlLogic.first).on(`click`, htmlLogic.second)
+    // $(`#container`).on(`click`, htmlLogic.second)
+    $(htmlLogic.second).on(`click`, htmlLogic.third)
 
 })
