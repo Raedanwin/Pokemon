@@ -1,4 +1,5 @@
 $(() => {
+    
     const pokemon = [{
             name: `Pikachu`,
             overallHealth: 48,
@@ -9,7 +10,8 @@ $(() => {
             type: `electric`,
             experience: 0,
             rarity: 3,
-            isFainted: false
+            isFainted: false,
+            pictureBack: `"https://img.pokemondb.net/sprites/black-white/anim/back-normal/pikachu-f.gif"`
         },
         {
             name: 'Bulbasaur',
@@ -21,7 +23,9 @@ $(() => {
             type: `grass`,
             experience: 0,
             rarity: 4,
-            isFainted: false
+            isFainted: false,
+            pictureFront: `"https://img.pokemondb.net/sprites/black-white/anim/normal/bulbasaur.gif"`,
+            pictureBack: `"https://img.pokemondb.net/sprites/black-white/anim/back-normal/bulbasaur.gif"`
         },
         {
             name: 'Charmander',
@@ -33,7 +37,9 @@ $(() => {
             type: `fire`,
             experience: 0,
             rarity: 4,
-            isFainted: false
+            isFainted: false,
+            pictureFront: `"https://img.pokemondb.net/sprites/black-white/anim/normal/charmander.gif"`,
+            pictureBack: `"https://img.pokemondb.net/sprites/black-white/anim/back-normal/charmander.gif"`
         },
         {
             name: 'Squirtle',
@@ -45,7 +51,9 @@ $(() => {
             type: `water`,
             experience: 0,
             rarity: 4,
-            isFainted: false
+            isFainted: false,
+            pictureFront: `"https://img.pokemondb.net/sprites/black-white/anim/normal/squirtle.gif"`,
+            pictureBack: `"https://img.pokemondb.net/sprites/black-white/anim/back-normal/squirtle.gif"`
         },
         {
             name: 'Eevee',
@@ -57,7 +65,8 @@ $(() => {
             type: `normal`,
             experience: 0,
             rarity: 5,
-            isFainted: false
+            isFainted: false,
+            pictureFront: `"https://img.pokemondb.net/sprites/black-white/anim/normal/eevee.gif"`
         },
 
     ]
@@ -91,13 +100,17 @@ $(() => {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         },
         pokeLoop: function() {
+            $(`#team`).empty()
+            $(`#stuff`).empty()
             for (let i = 0; i < player.team.length; i++) {
-                $(`#team`).html(`${player.team[i].name}`).appendTo(`#mon`)
+                $(`#team`).html(`${player.team[i].name}`).appendTo(`#menu`)
             }
         },
         itemLoop: function() {
+            $(`#team`).empty()
+            $(`#stuff`).empty()
             for (let i = 0; i < player.items.length; i++) {
-                $(`#stuff`).html(`${player.items[i].name}`).appendTo(`#things`)
+                $(`#stuff`).html(`${player.items[i].name}`).appendTo(`#menu`)
             }
         }
     }
@@ -231,10 +244,10 @@ $(() => {
         }
     }
     const toggleMon = () => {
-        $(`#mon`).toggle()
+        $(`#menu`).toggle()
     }
     const toggleThings = () => {
-        $(`#things`).toggle()
+        $(`#menu`).toggle()
     }
     const htmlLogic = {
         first: function() {
@@ -280,6 +293,8 @@ $(() => {
             $(`<button>`).text(`Bag`).addClass(`fightB`).attr(`id`, `bag`).on(`click`, htmlLogic.things).appendTo(`#buttonCon`)
             $(`<button>`).text(`Pokémon`).addClass(`fightB`).attr(`id`, `poke`).on(`click`, htmlLogic.pokemonShow).appendTo(`#buttonCon`)
             $(`<button>`).text(`Run`).addClass(`fightB`).attr(`id`, `run`).appendTo(`#buttonCon`)
+            $(`#teamPic`).css({ background: `url(${player.team[0].pictureBack})`, 'background-size': `cover` })
+            $(`#enemyPic`).css({ background: `url(${comp.team[0].pictureFront})`, 'background-size': `cover` })
             $(`#container`).on(`click`, htmlLogic.seventh)
             $(`.fightB`).on(`click`, function() {
                 event.stopPropagation()
@@ -318,19 +333,17 @@ $(() => {
         },
         things: function() {
             baseLogic.itemLoop()
-                // $(`#bag`).on(`click`, function() {$(`#things`).show()})
-            $(`#things`).on(`click`, toggleThings())
+            $(`#menu`).on(`click`, toggleThings())
         },
         hideThings: function() {
-            $(`#things`).hide()
+            $(`#menu`).hide()
         },
         pokemonShow: function() {
             baseLogic.pokeLoop()
-                // $(`#poke`).on(`click`, function() {$(`#mon`).toggle()})
-            $(`#poke`).on(`click`, toggleMon())
+            $(`#menu`).on(`click`, toggleMon())
         },
         pokemonHide: function() {
-            $(`#mon`).hide()
+            $(`#menu`).hide()
         }
     }
 

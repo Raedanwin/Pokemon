@@ -8,6 +8,7 @@ body {
 
 .whiteSpace {
     height: 80vh;
+    display: flex;
 }
 
 #container {
@@ -58,7 +59,6 @@ body {
 #fight {
     border: groove 5px rgb(191, 65, 62);
     background-color: lightpink;
-
 }
 
 #bag {
@@ -68,7 +68,8 @@ body {
 
 #poke {
     border: groove 5px darkgreen;
-    background: linear-gradient(to bottom, #5AAE2B 0%, #4c7046 100%);}
+    background: linear-gradient(to bottom, #5AAE2B 0%, #4c7046 100%);
+}
 
 #run {
     border: groove 5px navy;
@@ -107,4 +108,65 @@ body {
     width: 24%;
     background-color: rgba(0, 0, 0, .6);
     border-radius: 25px;
+}
+
+#menu {
+    /* flex-grow: 1; */
+    text-align: center;
+    color: white;
+    display: inline-block;
+    height: 100%;
+    width: 24%;
+    background-color: rgba(0, 0, 0, .6);
+    border-radius: 25px;
+}
+
+#opponent {
+    display: block;
+    height: 49%;
+    width: 100%;
+}
+
+#player {
+    display: block;
+    height: 49%;
+    width: 100%;
+}
+
+#teamPic {
+    width: 200px;
+    height: 200px;
+    /* background: blue; */
+    margin-top: -5%;
+    margin-left: 25%;
+    position: absolute;
+    background: url();
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#teamHealth {
+    width: 100px;
+    /* background: green; */
+    margin-left: 100%;
+}
+
+#enemyPic {
+    width: 200px;
+    height: 200px;
+    /* background: yellow; */
+    margin-left: 60%;
+    margin-top: 5%;
+    position: absolute;
+    background-image: url();
+    /* background: no-repeat; */
+    background-size: cover;
+}
+
+#enemyHealth {
+    width: 100px;
+    /* background: red; */
+    padding: 0;
+    margin-left: 600%;
+    margin-top: 150%;
 }
