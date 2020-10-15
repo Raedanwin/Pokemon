@@ -91,8 +91,15 @@ $(() => {
         randomNum: function(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         },
-        continueFunc: function() {
-            
+        pokeLoop: function() {
+            for(let i = 0; i < player.team.length; i++) {
+                $(`#team`).html(`${player.team[i].name}`).appendTo(`#mon`)
+            }
+        },
+        itemLoop: function() {
+            for(let i = 0; i < player.items.length; i++) {
+                $(`#stuff`).html(`${player.items[i].name}`).appendTo(`#things`)
+            }
         }
     }
 
@@ -145,7 +152,7 @@ $(() => {
         fainted: [],
         team: [],
         caught: [],
-        items: [potion],
+        items: [],
         pokeballs: [],
     }
 
@@ -224,7 +231,12 @@ $(() => {
             }
         }
     }
-
+const toggleMon = () => {
+    $(`#mon`).toggle()
+}
+const toggleThings = () => {
+    $(`#things`).toggle()
+}
     const htmlLogic = {
         first: function() {
             $(`#container`).empty()
@@ -267,7 +279,7 @@ $(() => {
             $(`<h2>`).text(`What will ${player.team[0].name} do?`).appendTo(`#fightCon`)
             $(`<button>`).text(`Fight`).addClass(`fightB`).attr(`id`, `fight`).on(`click`, battleLogic.fightMain).appendTo(`#buttonCon`)
             $(`<button>`).text(`Bag`).addClass(`fightB`).attr(`id`, `bag`).on(`click`, htmlLogic.things).appendTo(`#buttonCon`)
-            $(`<button>`).text(`Pokémon`).addClass(`fightB`).attr(`id`, `poke`).appendTo(`#buttonCon`)
+            $(`<button>`).text(`Pokémon`).addClass(`fightB`).attr(`id`, `poke`).on(`click`, htmlLogic.pokemonShow).appendTo(`#buttonCon`)
             $(`<button>`).text(`Run`).addClass(`fightB`).attr(`id`, `run`).appendTo(`#buttonCon`)
             $(`#container`).on(`click`, htmlLogic.seventh)
             $(`.fightB`).on(`click`, function() {
@@ -306,13 +318,17 @@ $(() => {
             location.reload()
         },
         things: function() {
-            $(`#bag`).on(`click`, function() {$(`#things`).toggle().html(`Items: ${player.items[0].name}`)})
+            baseLogic.itemLoop()
+            // $(`#bag`).on(`click`, function() {$(`#things`).show()})
+            $(`#things`).on(`click`, toggleThings())
         },
         hideThings: function() {
             $(`#things`).hide()
         },
         pokemonShow: function() {
-            $(`#poke`).on(`click`, function() {$(`#things`).toggle().html(`Who do you want to switch to?<br>${player.team[0]}`)})
+            baseLogic.pokeLoop()
+            // $(`#poke`).on(`click`, function() {$(`#mon`).toggle()})
+            $(`#poke`).on(`click`, toggleMon())
         },
         pokemonHide: function() {
             $(`#mon`).hide()
