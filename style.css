@@ -13,7 +13,6 @@ body {
 
 #container {
     background-color: white;
-    /* background: linear-gradient(to bottom, #615F61 0%, #DBD8DB 50%, #615F61 100%); */
     border: solid 5px skyblue;
     border-radius: 25px;
     text-align: center;
@@ -111,7 +110,6 @@ body {
 }
 
 #menu {
-    /* flex-grow: 1; */
     text-align: center;
     color: white;
     display: inline-block;
@@ -136,7 +134,6 @@ body {
 #teamPic {
     width: 200px;
     height: 200px;
-    /* background: blue; */
     margin-top: -5%;
     margin-left: 25%;
     position: absolute;
@@ -147,25 +144,21 @@ body {
 
 #teamHealth {
     width: 100px;
-    /* background: green; */
     margin-left: 100%;
 }
 
 #enemyPic {
     width: 200px;
     height: 200px;
-    /* background: yellow; */
     margin-left: 60%;
     margin-top: 5%;
     position: absolute;
     background-image: url();
-    /* background: no-repeat; */
     background-size: cover;
 }
 
 #enemyHealth {
     width: 100px;
-    /* background: red; */
     padding: 0;
     margin-left: 600%;
     margin-top: 150%;

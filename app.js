@@ -1,5 +1,5 @@
 $(() => {
-    
+    // objects for all the available pokemon
     const pokemon = [{
             name: `Pikachu`,
             overallHealth: 48,
@@ -80,25 +80,28 @@ $(() => {
             this.health = health || 0;
             this.strength = strength || 0;
         }
-
+        // function that is never used for later progress
         increaseLevel() {
             player.team[0].experience += 15
             levelUp()
         }
-
+        // also never used for later progress
         heal(user) {
             user.team[0].health += this.health
         }
     }
+    // neither of these are used really, potion is referenced but never used
     let candy = new GameItems(`Rare Candy`, 1000)
     let potion = new GameItems(`Potion`, 200, 20)
 
 
     // base logic that will probably be reused a lot 
     const baseLogic = {
+        // random number gen that i thought i would use but never actually did
         randomNum: function(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         },
+        // loops to show every pokemon in your team and every item you have when called on
         pokeLoop: function() {
             $(`#team`).empty()
             $(`#stuff`).empty()
@@ -158,7 +161,7 @@ $(() => {
             console.log(comp.team)
         }
     }
-
+    // object to contain all the players info
     const player = {
         name: `Rae`,
         fainted: [],
@@ -167,7 +170,7 @@ $(() => {
         items: [potion],
         pokeballs: [],
     }
-
+    // object to contain all the computers info
     const comp = {
         name: `Gary`,
         fainted: [],
@@ -189,7 +192,6 @@ $(() => {
             },
             // logic for a player and computer loss
             fightOutcome: function() {
-
                 if (player.team.length === 0 && comp.team.length >= 1) {
                     alert(`All your Pokemon fainted and you rushed to the Pokécenter`)
                     this.resetHealth(player)
@@ -216,6 +218,7 @@ $(() => {
                     }
                 }
             },
+            // main function to combine all the fight functions into 1 
             fightMain: function() {
                 typeFight(player, comp)
                 if (comp.team[0].health > 0) {
@@ -226,11 +229,11 @@ $(() => {
                 battleLogic.fightOutcome()
             }
         }
-        // general logic for catching pokemon
+        // general logic for catching pokemon that isnt implemented yet
     const catchLogic = {
 
     }
-
+    // level up function that is used but never actually shown because theres only one fight so far
     const levelUp = () => {
         for (let i = 0; i < player.team.length; i++) {
             if (player.team[i].experience % 10 === 0) {
@@ -243,12 +246,15 @@ $(() => {
             }
         }
     }
+    // toggles the div that shows the pokemon and items of the player
     const toggleMon = () => {
         $(`#menu`).toggle()
     }
     const toggleThings = () => {
         $(`#menu`).toggle()
     }
+    // object for functions to show all the pages and dialogue of the game
+    // theres a lot of logic here but not much to say other than "it changes to the next page"
     const htmlLogic = {
         first: function() {
             $(`#container`).empty()
@@ -328,9 +334,11 @@ $(() => {
             $(`<h3>`).html(`To be continued...`).appendTo(`#container`)
             $(`#container`).on(`click`, htmlLogic.end)
         },
+        // reloads the page to reset the game
         end: function() {
             location.reload()
         },
+        // these 4 functions show and hide the menu div
         things: function() {
             baseLogic.itemLoop()
             $(`#menu`).on(`click`, toggleThings())
