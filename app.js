@@ -82,7 +82,9 @@ $(() => {
             user.team[0].health += this.health
         }
     }
-    let test = new GameItems(`Rare Candy`, 1000)
+    let candy = new GameItems(`Rare Candy`, 1000)
+    let potion = new GameItems(`Potion`, 200, 20)
+
 
     // base logic that will probably be reused a lot 
     const baseLogic = {
@@ -143,7 +145,7 @@ $(() => {
         fainted: [],
         team: [],
         caught: [],
-        items: [],
+        items: [potion],
         pokeballs: [],
     }
 
@@ -223,13 +225,11 @@ $(() => {
         }
     }
 
-    const testFunction = () => {
-        htmlLogic.third()
-    }
-
     const htmlLogic = {
         first: function() {
             $(`#container`).empty()
+            htmlLogic.hideThings()
+            htmlLogic.pokemonHide()
             $(`<h3>`).text(`Gary: Wake up ${player.name}, today's the day we get our pokemon! We should head to Professor Oak's lab right away. Race you there!`).appendTo(`#container`)
         },
         second: function() {
@@ -266,7 +266,7 @@ $(() => {
             $(`<div>`).attr(`id`, `buttonCon`).appendTo(`#container`)
             $(`<h2>`).text(`What will ${player.team[0].name} do?`).appendTo(`#fightCon`)
             $(`<button>`).text(`Fight`).addClass(`fightB`).attr(`id`, `fight`).on(`click`, battleLogic.fightMain).appendTo(`#buttonCon`)
-            $(`<button>`).text(`Bag`).addClass(`fightB`).attr(`id`, `bag`).appendTo(`#buttonCon`)
+            $(`<button>`).text(`Bag`).addClass(`fightB`).attr(`id`, `bag`).on(`click`, htmlLogic.things).appendTo(`#buttonCon`)
             $(`<button>`).text(`Pokémon`).addClass(`fightB`).attr(`id`, `poke`).appendTo(`#buttonCon`)
             $(`<button>`).text(`Run`).addClass(`fightB`).attr(`id`, `run`).appendTo(`#buttonCon`)
             $(`#container`).on(`click`, htmlLogic.seventh)
@@ -304,8 +304,19 @@ $(() => {
         },
         end: function() {
             location.reload()
+        },
+        things: function() {
+            $(`#bag`).on(`click`, function() {$(`#things`).html(`Items: ${player.items[0].name}`)})
+        },
+        hideThings: function() {
+            $(`#things`).hide()
+        },
+        pokemonShow: function() {
+            $(`#mon`).html(`Who do you want to switch to?<br>${player.team}`)
+        },
+        pokemonHide: function() {
+            $(`#mon`).hide()
         }
-        
     }
 
     // event listeners

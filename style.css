@@ -89,6 +89,16 @@ body {
     height: 100vh;
 }
 
-.screenIIII {
+#mon {
+    display: inline-block;
+    height: 100%;
+    width: 74%;
+    background-color: white;
+}
 
+#things {
+    display: inline-block;
+    height: 100%;
+    width: 24%;
+    background-color: white;
 }
