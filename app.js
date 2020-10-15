@@ -306,13 +306,13 @@ $(() => {
             location.reload()
         },
         things: function() {
-            $(`#bag`).on(`click`, function() {$(`#things`).html(`Items: ${player.items[0].name}`)})
+            $(`#bag`).on(`click`, function() {$(`#things`).toggle().html(`Items: ${player.items[0].name}`)})
         },
         hideThings: function() {
             $(`#things`).hide()
         },
         pokemonShow: function() {
-            $(`#mon`).html(`Who do you want to switch to?<br>${player.team}`)
+            $(`#poke`).on(`click`, function() {$(`#things`).toggle().html(`Who do you want to switch to?<br>${player.team[0]}`)})
         },
         pokemonHide: function() {
             $(`#mon`).hide()
