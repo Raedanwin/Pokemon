@@ -121,24 +121,13 @@ body {
     border-radius: 25px;
 }
 
-#gameScreen {
-    /* flex-grow: 3; */
-    display: flex;
-    /* flex-direction: column; */
-    width: 100%;
-}
-
 #opponent {
-    /* flex-grow: 1; */
-    /* background-color: purple; */
     display: block;
     height: 49%;
     width: 100%;
 }
 
 #player {
-    /* flex-grow: 1; */
-    /* background-color: pink; */
     display: block;
     height: 49%;
     width: 100%;
@@ -147,30 +136,37 @@ body {
 #teamPic {
     width: 200px;
     height: 200px;
-    background: blue;
-    margin-top: 8%;
+    /* background: blue; */
+    margin-top: -5%;
     margin-left: 25%;
     position: absolute;
+    background: url();
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 #teamHealth {
     width: 100px;
-    background: green;
+    /* background: green; */
+    margin-left: 100%;
 }
 
 #enemyPic {
     width: 200px;
     height: 200px;
-    background: yellow;
-    margin-left: 65%;
-    margin-top: 15%;
+    /* background: yellow; */
+    margin-left: 60%;
+    margin-top: 5%;
     position: absolute;
+    background-image: url();
+    /* background: no-repeat; */
+    background-size: cover;
 }
 
 #enemyHealth {
     width: 100px;
-    background: red;
+    /* background: red; */
     padding: 0;
-    margin-left: 50%;
-    margin-top: 10%;
+    margin-left: 600%;
+    margin-top: 150%;
 }

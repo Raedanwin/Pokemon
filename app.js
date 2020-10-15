@@ -1,6 +1,5 @@
 $(() => {
-    const pokemon = [
-        {
+    const pokemon = [{
             name: `Pikachu`,
             overallHealth: 48,
             health: 48,
@@ -10,7 +9,8 @@ $(() => {
             type: `electric`,
             experience: 0,
             rarity: 3,
-            isFainted: false
+            isFainted: false,
+            pictureBack: `"https://img.pokemondb.net/sprites/black-white/anim/back-normal/pikachu-f.gif"`
         },
         {
             name: 'Bulbasaur',
@@ -22,7 +22,9 @@ $(() => {
             type: `grass`,
             experience: 0,
             rarity: 4,
-            isFainted: false
+            isFainted: false,
+            pictureFront: `"https://img.pokemondb.net/sprites/black-white/anim/normal/bulbasaur.gif"`,
+            pictureBack: `"https://img.pokemondb.net/sprites/black-white/anim/back-normal/bulbasaur.gif"`
         },
         {
             name: 'Charmander',
@@ -34,7 +36,9 @@ $(() => {
             type: `fire`,
             experience: 0,
             rarity: 4,
-            isFainted: false
+            isFainted: false,
+            pictureFront: `"https://img.pokemondb.net/sprites/black-white/anim/normal/charmander.gif"`,
+            pictureBack: `"https://img.pokemondb.net/sprites/black-white/anim/back-normal/charmander.gif"`
         },
         {
             name: 'Squirtle',
@@ -46,7 +50,9 @@ $(() => {
             type: `water`,
             experience: 0,
             rarity: 4,
-            isFainted: false
+            isFainted: false,
+            pictureFront: `"https://img.pokemondb.net/sprites/black-white/anim/normal/squirtle.gif"`,
+            pictureBack: `"https://img.pokemondb.net/sprites/black-white/anim/back-normal/squirtle.gif"`
         },
         {
             name: 'Eevee',
@@ -58,7 +64,8 @@ $(() => {
             type: `normal`,
             experience: 0,
             rarity: 5,
-            isFainted: false
+            isFainted: false,
+            pictureFront: `"https://img.pokemondb.net/sprites/black-white/anim/normal/eevee.gif"`
         },
 
     ]
@@ -94,14 +101,14 @@ $(() => {
         pokeLoop: function() {
             $(`#team`).empty()
             $(`#stuff`).empty()
-            for(let i = 0; i < player.team.length; i++) {
+            for (let i = 0; i < player.team.length; i++) {
                 $(`#team`).html(`${player.team[i].name}`).appendTo(`#menu`)
             }
         },
         itemLoop: function() {
             $(`#team`).empty()
             $(`#stuff`).empty()
-            for(let i = 0; i < player.items.length; i++) {
+            for (let i = 0; i < player.items.length; i++) {
                 $(`#stuff`).html(`${player.items[i].name}`).appendTo(`#menu`)
             }
         }
@@ -125,7 +132,7 @@ $(() => {
             } else {
                 player.team.unshift(pokemon[1])
                 comp.team.unshift(pokemon[2])
-            } 
+            }
             console.log(player.team)
             console.log(comp.team)
         },
@@ -150,7 +157,7 @@ $(() => {
             console.log(comp.team)
         }
     }
-    
+
     const player = {
         name: `Rae`,
         fainted: [],
@@ -169,56 +176,56 @@ $(() => {
 
     // overall logic for the battle
     const battleLogic = {
-        types: [`water`, `fire`, `electric`, `normal`, `dragon`, `fairy`, `grass`, `ground`, `rock`, `ice`, `flying`, `fighting`, `poison`, `psychic`, `bug`, `steel`, `ghost`, `dark`],
-        // heals the pokemon when needed
-        resetHealth: function(user) {
-            if (user.team.length === 0) {
-                for(let i = 0; i < user.fainted.length; i++) {
-                    user.fainted[i].health = user.fainted[i].overallHealth
-                    user.team.push(user.fainted[i])
+            types: [`water`, `fire`, `electric`, `normal`, `dragon`, `fairy`, `grass`, `ground`, `rock`, `ice`, `flying`, `fighting`, `poison`, `psychic`, `bug`, `steel`, `ghost`, `dark`],
+            // heals the pokemon when needed
+            resetHealth: function(user) {
+                if (user.team.length === 0) {
+                    for (let i = 0; i < user.fainted.length; i++) {
+                        user.fainted[i].health = user.fainted[i].overallHealth
+                        user.team.push(user.fainted[i])
+                    }
                 }
-            } 
-        },
-        // logic for a player and computer loss
-        fightOutcome: function() {
-            
-            if (player.team.length === 0 && comp.team.length >= 1) {
-                alert(`All your Pokemon fainted and you rushed to the Pokécenter`)
-                this.resetHealth(player)
-                this.resetHealth(comp)
-                htmlLogic.lose()
-            } else if (comp.team.length === 0 && player.team.length >= 1) {
-                alert(`You have won the battle`)
-                for(let i = 0; i < player.team.length; i++) {
-                    player.team[i].experience += 5
+            },
+            // logic for a player and computer loss
+            fightOutcome: function() {
+
+                if (player.team.length === 0 && comp.team.length >= 1) {
+                    alert(`All your Pokemon fainted and you rushed to the Pokécenter`)
+                    this.resetHealth(player)
+                    this.resetHealth(comp)
+                    htmlLogic.lose()
+                } else if (comp.team.length === 0 && player.team.length >= 1) {
+                    alert(`You have won the battle`)
+                    for (let i = 0; i < player.team.length; i++) {
+                        player.team[i].experience += 5
+                    }
+                    levelUp()
+                    this.resetHealth(comp)
+                    htmlLogic.win()
                 }
-                levelUp()
-                this.resetHealth(comp)  
-                htmlLogic.win()
+            },
+            // applies a fainted value if a pokemon's health is 0 or less and moves them to a different array.
+            faintLogic: function(user) {
+                if (user.team[0].health <= 0) {
+                    user.team[0].isFainted = true
+                    console.log(`${user.name}'s ${user.team[0].name} has fainted`)
+                    if (user.team[0].isFainted === true) {
+                        user.fainted.push(user.team[0])
+                        user.team.shift()
+                    }
+                }
+            },
+            fightMain: function() {
+                typeFight(player, comp)
+                if (comp.team[0].health > 0) {
+                    typeFight(comp, player)
+                }
+                battleLogic.faintLogic(player)
+                battleLogic.faintLogic(comp)
+                battleLogic.fightOutcome()
             }
-        },
-        // applies a fainted value if a pokemon's health is 0 or less and moves them to a different array.
-        faintLogic: function(user) {
-            if (user.team[0].health <= 0) {
-                user.team[0].isFainted = true
-                console.log(`${user.name}'s ${user.team[0].name} has fainted`)
-                if (user.team[0].isFainted === true) {
-                    user.fainted.push(user.team[0])
-                    user.team.shift()
-                }
-            } 
-        },
-        fightMain: function() {
-            typeFight(player, comp)
-            if (comp.team[0].health > 0) {
-                typeFight(comp, player)
-            }
-            battleLogic.faintLogic(player)
-            battleLogic.faintLogic(comp)
-            battleLogic.fightOutcome()
         }
-    }
-    // general logic for catching pokemon
+        // general logic for catching pokemon
     const catchLogic = {
 
     }
@@ -227,7 +234,7 @@ $(() => {
         for (let i = 0; i < player.team.length; i++) {
             if (player.team[i].experience % 10 === 0) {
                 player.team[i].level++
-                player.team[i].overallHealth += 5
+                    player.team[i].overallHealth += 5
                 player.team[i].health = player.team[i].overallHealth
                 player.team[i].attack += 5
                 player.team[i].speed += 5
@@ -235,16 +242,12 @@ $(() => {
             }
         }
     }
-const toggleMon = () => {
-    // $(`#team`).empty()
-    // $(`#stuff`).empty()
-    $(`#menu`).toggle()
-}
-const toggleThings = () => {
-    // $(`#team`).empty()
-    // $(`#stuff`).empty()
-    $(`#menu`).toggle()
-}
+    const toggleMon = () => {
+        $(`#menu`).toggle()
+    }
+    const toggleThings = () => {
+        $(`#menu`).toggle()
+    }
     const htmlLogic = {
         first: function() {
             $(`#container`).empty()
@@ -281,7 +284,7 @@ const toggleThings = () => {
         },
         sixth: function() {
             $(`#container`).empty()
-            $(`#container`).css({background: `linear-gradient(to bottom, #615F61 0%, #DBD8DB 50%, #615F61 100%)`})
+            $(`#container`).css({ background: `linear-gradient(to bottom, #615F61 0%, #DBD8DB 50%, #615F61 100%)` })
             $(`<div>`).attr(`id`, `fightCon`).appendTo(`#container`)
             $(`<div>`).attr(`id`, `buttonCon`).appendTo(`#container`)
             $(`<h2>`).text(`What will ${player.team[0].name} do?`).appendTo(`#fightCon`)
@@ -289,27 +292,29 @@ const toggleThings = () => {
             $(`<button>`).text(`Bag`).addClass(`fightB`).attr(`id`, `bag`).on(`click`, htmlLogic.things).appendTo(`#buttonCon`)
             $(`<button>`).text(`Pokémon`).addClass(`fightB`).attr(`id`, `poke`).on(`click`, htmlLogic.pokemonShow).appendTo(`#buttonCon`)
             $(`<button>`).text(`Run`).addClass(`fightB`).attr(`id`, `run`).appendTo(`#buttonCon`)
+            $(`#teamPic`).css({ background: `url(${player.team[0].pictureBack})`, 'background-size': `cover` })
+            $(`#enemyPic`).css({ background: `url(${comp.team[0].pictureFront})`, 'background-size': `cover` })
             $(`#container`).on(`click`, htmlLogic.seventh)
             $(`.fightB`).on(`click`, function() {
                 event.stopPropagation()
-            })       
+            })
         },
         lose: function() {
             $(`#container`).empty()
-            $(`#container`).css({background: `white`})
+            $(`#container`).css({ background: `white` })
             $(`<h3>`).text(`Gary: That was a good battle but I told you I had the type advantage haha. Better luck next time!`).appendTo(`#container`)
             $(`#container`).on(`click`, htmlLogic.seventh)
         },
         win: function() {
             $(`#container`).empty()
-            $(`#container`).css({background: `white`})
+            $(`#container`).css({ background: `white` })
             $(`<h3>`).text(`Gary: Man, even with my type advantage you still beat me! You're gonna be a super trainer one day!`).appendTo(`#container`)
             $(`#container`).on(`click`, htmlLogic.seventh)
         },
         seventh: function() {
             $(`#container`).empty()
             $(`<h3>`).text(`Gary: We should head off on our Pokémon training adventure now! See you at the next town ${player.name}!`).appendTo(`#container`)
-            $(`#container`).css({background: `white`})
+            $(`#container`).css({ background: `white` })
             $(`#container`).on(`click`, htmlLogic.eighth)
         },
         eighth: function() {
