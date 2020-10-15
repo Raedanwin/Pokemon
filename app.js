@@ -92,13 +92,17 @@ $(() => {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         },
         pokeLoop: function() {
+            $(`#team`).empty()
+            $(`#stuff`).empty()
             for(let i = 0; i < player.team.length; i++) {
-                $(`#team`).html(`${player.team[i].name}`).appendTo(`#mon`)
+                $(`#team`).html(`${player.team[i].name}`).appendTo(`#menu`)
             }
         },
         itemLoop: function() {
+            $(`#team`).empty()
+            $(`#stuff`).empty()
             for(let i = 0; i < player.items.length; i++) {
-                $(`#stuff`).html(`${player.items[i].name}`).appendTo(`#things`)
+                $(`#stuff`).html(`${player.items[i].name}`).appendTo(`#menu`)
             }
         }
     }
@@ -152,7 +156,7 @@ $(() => {
         fainted: [],
         team: [],
         caught: [],
-        items: [],
+        items: [potion],
         pokeballs: [],
     }
 
@@ -232,10 +236,14 @@ $(() => {
         }
     }
 const toggleMon = () => {
-    $(`#mon`).toggle()
+    // $(`#team`).empty()
+    // $(`#stuff`).empty()
+    $(`#menu`).toggle()
 }
 const toggleThings = () => {
-    $(`#things`).toggle()
+    // $(`#team`).empty()
+    // $(`#stuff`).empty()
+    $(`#menu`).toggle()
 }
     const htmlLogic = {
         first: function() {
@@ -319,19 +327,17 @@ const toggleThings = () => {
         },
         things: function() {
             baseLogic.itemLoop()
-            // $(`#bag`).on(`click`, function() {$(`#things`).show()})
-            $(`#things`).on(`click`, toggleThings())
+            $(`#menu`).on(`click`, toggleThings())
         },
         hideThings: function() {
-            $(`#things`).hide()
+            $(`#menu`).hide()
         },
         pokemonShow: function() {
             baseLogic.pokeLoop()
-            // $(`#poke`).on(`click`, function() {$(`#mon`).toggle()})
-            $(`#poke`).on(`click`, toggleMon())
+            $(`#menu`).on(`click`, toggleMon())
         },
         pokemonHide: function() {
-            $(`#mon`).hide()
+            $(`#menu`).hide()
         }
     }
 

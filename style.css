@@ -8,6 +8,7 @@ body {
 
 .whiteSpace {
     height: 80vh;
+    display:flex;
 }
 
 #container {
@@ -107,4 +108,18 @@ body {
     width: 24%;
     background-color: rgba(0, 0, 0, .6);
     border-radius: 25px;
+}
+#menu{
+    flex-grow: 1;
+    text-align: center;
+    color: white;
+    display: inline-block;
+    height: 100%;
+    /* width: 24%; */
+    background-color: rgba(0, 0, 0, .6);
+    border-radius: 25px;
+}
+#gameScreen{
+    flex-grow: 3;
+   
 }
