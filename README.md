@@ -46,4 +46,5 @@ The biggest technical challenges I faced were:
 1. I would let you continue to battle after the initial fight so you could level up and encounter more pokémon.
 2. I would add catching logic to allow the player to get more than 1 pokémon.
 3. I would add an API to give more variety to the pokemon selection.
-4. I would make some more quality of life changes like figuring out how to make some screens time-based, add more items and let you change pokémon and use items in the middle of a battle.
+4. I would make some more quality of life changes like figuring out how to make some screens time-based, fix the menu and pokémon showing up after the battle, add more items and let you change pokémon and use items in the middle of a battle.
+5. I would give the Run button in the battle functionality.
