@@ -23,18 +23,18 @@ I used HTML and CSS for my front end, jQuery to develop my dom and JavaScript to
 ////////////////////
 // Link to live site
 ////////////////////
-https://raedanwin.github.io/Pokemon/
+  https://raedanwin.github.io/Pokemon/
 
 ////////////////////
 // Unsolved Problems
 ////////////////////
-The main unsolved problem is that when you open the pokémon/items menu on the fight screen, the pokémon gifs move out of place while its open.
-A couple other small ones are that if you don't close the battle menu before the end of the battle it stays up for the rest of the game and the gifs of the pokémon don't disappear after moving onto the next screen.
+  The main unsolved problem is that when you open the pokémon/items menu on the fight screen, the pokémon gifs move out of place while its open.
+  A couple other small ones are that if you don't close the battle menu before the end of the battle it stays up for the rest of the game and the gifs of the       pokémon don't disappear after moving onto the next screen.
 
 ////////////////////
 // Technical Challenges
 ////////////////////
-The biggest technical challenges I faced were: 
+  The biggest technical challenges I faced were: 
 1. I had issues with my battle logic in that fainted pokémon would still be able to attack so the battle would never end.
 2. Probably my biggest issue was that I couldn't progress past my third screen. It would do the first and second or the third and fourth but never together.
 3. I had issues with setting a timeout so it would only fire once, it would keep firing everytime I tried to move on the next screen and go back to screen 6. I never figured out how to fix that one and eventually settled on a different solution.
