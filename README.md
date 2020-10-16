@@ -4,7 +4,7 @@ Project 1 for GA
 ////////////////////
 // Technologies Used
 ////////////////////
-I used HTML and CSS for my front end, jQuery to develop my dom and JavaScript to give it functionality.
+  I used HTML and CSS for my front end, jQuery to develop my dom and JavaScript to give it functionality.
 
 ////////////////////
 //  Approach Taken
