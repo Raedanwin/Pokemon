@@ -229,7 +229,7 @@ $(() => {
                 battleLogic.fightOutcome()
             }
         }
-        // general logic for catching pokemon that isnt implemented yet
+    // general logic for catching pokemon that isnt implemented yet
     const catchLogic = {
 
     }
